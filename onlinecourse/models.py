@@ -95,8 +95,8 @@ class Enrollment(models.Model):
     rating = models.FloatField(default=5.0)
 
 class Question(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    question = models.TextField()
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='questions')
+    text = models.TextField()
     grade_point = models.IntegerField()
 
     def is_get_score(self, selected_ids):
@@ -128,8 +128,8 @@ class Question(models.Model):
     #        return False
 
 class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice = models.TextField()
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="choices")
+    text = models.TextField()
     is_correct = models.BooleanField(default=False)
 
 #  <HINT> Create a Choice Model with:

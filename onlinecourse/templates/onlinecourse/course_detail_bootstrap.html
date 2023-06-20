@@ -28,7 +28,7 @@
                         {% csrf_token %}
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Username" name="username" >
-                            <input type="password" class="form-control" placeholder="Username" name="psw" >
+                            <input type="password" class="form-control" placeholder="Password" name="psw" >
                             <button class="btn btn-primary" type="submit">Login</button>
                             <a class="btn btn-link" href="{% url 'onlinecourse:registration' %}">Sign Up</a>
                         </div>
@@ -62,7 +62,29 @@
                 </div>
 
             -->
-
+            <button class="btn btn-block btn-primary" data-toggle="collapse" data-target="#demo">show exam</button>
+            
+            <div class="collapse mt-3" id="demo">
+                <form method="post" >
+                  {% csrf_token %}
+                  {% for question in course.questions.all %}
+                    <div class="card my-3">
+                      <div class="card-header">
+                        <h3 class="card-title">{{ question.text }}</h3>
+                      </div>
+                      <div class="card-body">
+                        {% for choice in question.choices.all %}
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="selected_choices" value="{{ choice.id }}">
+                            <label class="form-check-label">{{ choice.text }}</label>
+                          </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  {% endfor %}
+                  <button class="btn btn-primary btn-block btn-success" type="submit">Submit</button>
+                </form>
+              </div>
             <!-- <HINT> If user is authenticated, show course exam with a list of question -->
 
             <!-- <HINT> Each example will have many questions -->
