@@ -65,7 +65,7 @@
             <button class="btn btn-block btn-primary" data-toggle="collapse" data-target="#demo">show exam</button>
             
             <div class="collapse mt-3" id="demo">
-                <form method="post" >
+                <form method="post" action="submit/" method="post">
                   {% csrf_token %}
                   {% for question in course.questions.all %}
                     <div class="card my-3">
